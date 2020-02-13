@@ -22,6 +22,6 @@ jobs:
           touch out/.nojekyll
       - uses: peaceiris/actions-gh-pages@v2.3.1
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./out
