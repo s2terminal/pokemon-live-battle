@@ -1,0 +1,25 @@
+{
+  "files.autoSave": "off",
+
+  // 改行・エンコード
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+
+  // タブ設定
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  // カーソル
+  "editor.cursorStyle": "block-outline",
+  "editor.cursorBlinking": "expand",
+  "editor.renderControlCharacters": true,
+  "editor.renderIndentGuides": true,
+  "editor.renderLineHighlight": "all",
+  "editor.roundedSelection": false,
+
+  // ターミナル
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.fontSize": 20
+}
