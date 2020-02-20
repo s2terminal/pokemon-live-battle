@@ -13,7 +13,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-const title = 'ポケモン剣盾 ライブ大会の対戦ルーム番号を計算するやつ';
+const TITLE = 'ポケモン剣盾 ライブ大会の対戦ルーム番号を計算するやつ';
+const SAVE_QUERYSTRING_KEY = 'member';
+type saveParams = {
+  fightersString: string, observersString: string
+};
 
 // メインコンポーネント
 const Home = () => {
@@ -26,15 +30,46 @@ const Home = () => {
   const observers = (observersString === "") ? [] : observersString.split(",");
   const battlesArray = Battle.soatari(fighters);
 
+  const saveURL = (saveParams: saveParams): string => {
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set(SAVE_QUERYSTRING_KEY, JSON.stringify(saveParams));
+      return url.href;
+    } catch (error) {
+      return '';
+    }
+  }
+
+  const loadURL = (): saveParams => {
+    try {
+      const url = new URL(decodeURI(window.location.href));
+      const data = JSON.parse(url.searchParams.get(SAVE_QUERYSTRING_KEY));
+      if (!data?.fightersString && !data?.observersString) { return; };
+
+      url.searchParams.delete(SAVE_QUERYSTRING_KEY);
+      window.history.pushState(null, null, url.toString());
+
+      return { fightersString: data?.fightersString.toString(), observersString: data?.observersString.toString() };
+    } catch (error) {
+      console.debug(error);
+    }
+  }
+
+  const loadedParams = loadURL();
+  if (loadedParams) {
+    setFightersString(loadedParams.fightersString);
+    setObserversString(loadedParams.observersString);
+  }
+
   return (
     <div>
       <Head>
-        <title>{title}</title>
+        <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <CssBaseline />
 
-      <Header title={title} />
+      <Header title={TITLE} />
 
       <Container>
         <h2>設定</h2>
@@ -57,6 +92,16 @@ const Home = () => {
           onChange={handleChangeObservers}
           variant="outlined"
           label={`観戦するひと(${observers.length}人)`}
+        />
+
+        <p className="description">
+          この対戦メンバーのURL
+        </p>
+        <TextField
+          value={saveURL({fightersString, observersString})}
+          style={{width: "100%"}}
+          disabled
+          size="small"
         />
 
         <h2>総当たり対戦</h2>
