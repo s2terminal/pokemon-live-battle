@@ -14,6 +14,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 const TITLE = 'ポケモン剣盾 ライブ大会の対戦ルーム番号を計算するやつ';
+const CANONICAL_URL = 'https://s2terminal.github.io/pokemon-live-battle/';
 const SAVE_QUERYSTRING_KEY = 'member';
 type saveParams = {
   fightersString: string, observersString: string
@@ -66,6 +67,7 @@ const Home = () => {
       <Head>
         <title>{TITLE}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href={CANONICAL_URL} />
       </Head>
       <CssBaseline />
 
@@ -95,7 +97,7 @@ const Home = () => {
         />
 
         <p className="description">
-          この対戦メンバーのURL
+          この対戦メンバーの共有用URL
         </p>
         <TextField
           value={saveURL({fightersString, observersString})}
