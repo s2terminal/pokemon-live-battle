@@ -21,5 +21,8 @@
   // ターミナル
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
-  "terminal.integrated.fontSize": 20
+  "terminal.integrated.fontSize": 20,
+
+  // TypeScript
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
